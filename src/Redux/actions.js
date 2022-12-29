@@ -1,9 +1,37 @@
-import { REFRESH, VALUTES_LOAD } from "./types";
+import { REFRESH, VALUTES_LOAD, SET_MAIN_VALUTE, SET_CONVERTED_VALUTE, CONVERTED_INPUT, MAIN_INPUT } from "./types";
 import axios from 'axios';
 
 export function refresh() {
     return {
         type: REFRESH
+    }
+};
+
+export function setMainValute(data) {
+    return {
+        type: SET_MAIN_VALUTE,
+        data: data
+    }
+};
+
+export function setConvertedValute(data) {
+    return {
+        type: SET_CONVERTED_VALUTE,
+        data: data
+    }
+};
+
+export function mainInput(text) {
+    return {
+        type: MAIN_INPUT,
+        text: text
+    }
+};
+
+export function convertedInput(text) {
+    return {
+        type: CONVERTED_INPUT,
+        text: text
     }
 };
 

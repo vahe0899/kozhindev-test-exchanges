@@ -2,3 +2,7 @@ export const REFRESH = 'REFRESH';
 export const VALUTES_LOAD = 'VALUTES_LOAD';
 export const LOADER_ON = 'LOADER_ON';
 export const LOADER_OFF = 'LOADER_OFF';
+export const SET_MAIN_VALUTE = 'SET_MAIN_VALUTE';
+export const SET_CONVERTED_VALUTE = 'SET_CONVERTED_VALUTE';
+export const MAIN_INPUT = 'MAIN_INPUT';
+export const CONVERTED_INPUT = 'CONVERTED_INPUT';
