@@ -4,6 +4,7 @@ import { valutesLoad, setMainValute, setConvertedValute, convertedInput, mainInp
 import { useEffect } from 'react';
 import TableRow from '../TableRow/TableRow';
 import SelectItem from '../SelectItem/SelectItem';
+import Spin from '../Spin/Spin';
 
 function Exchange() {
     const dispatch = useDispatch();
@@ -62,6 +63,7 @@ function Exchange() {
 
     return(
     <div className="container">
+        <Spin />
         <div className="header">
             <h2 className="title">
                 Currency Converter by Vahe Galstyan
@@ -86,14 +88,14 @@ function Exchange() {
                     <th>Курс к Евро</th>
                     <th>Курс к Юаню</th>
                 </tr>
-                {valute.map((item) => <TableRow data={item} id={valute.indexOf(item) + 1} dollar={dollar} euro={euro} yuan={yuan}/>)}
+                {valute.map((item) => <TableRow data={item} id={valute.indexOf(item) + 1} dollar={dollar} euro={euro} yuan={yuan} key={valute.indexOf(item)}/>)}
             </tbody>
         </table>
         <div className="converter">
                 <div className="dropdown">
                     <select className="dropbtn" onChange={mainValuteHandler}>
                         <option disabled selected value> -- Выберите валюту -- </option>
-                        {valute.map((item) => <SelectItem data={item} id={valute.indexOf(item) + 1}/>)}
+                        {valute.map((item) => <SelectItem data={item} id={valute.indexOf(item) + 1} key={valute.indexOf(item)}/>)}
                     </select>   
                     <input type="number" placeholder='Введите значение...' onChange={mainInputHandler} value={mainInputValue}></input>
                 </div>    
@@ -101,7 +103,7 @@ function Exchange() {
                     <input type="number" placeholder='Введите значение...' onChange={convertedInputHandler} value={convertedInputValue}></input>
                     <select className="dropbtn" onChange={convertedValuteHandler}>
                         <option disabled selected value> -- Выберите валюту -- </option>
-                        {valute.map((item) => <SelectItem data={item} id={valute.indexOf(item) + 1}/>)}
+                        {valute.map((item) => <SelectItem data={item} id={valute.indexOf(item) + 1} key={valute.indexOf(item)}/>)}
                     </select>   
                 </div>     
         </div>

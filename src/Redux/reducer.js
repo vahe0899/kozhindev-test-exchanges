@@ -1,4 +1,4 @@
-import { REFRESH, VALUTES_LOAD, SET_MAIN_VALUTE, SET_CONVERTED_VALUTE, MAIN_INPUT, CONVERTED_INPUT } from "./types";
+import { VALUTES_LOAD, SET_MAIN_VALUTE, SET_CONVERTED_VALUTE, MAIN_INPUT, CONVERTED_INPUT, LOADER_OFF, LOADER_ON } from "./types";
 
 const initialState = {
     valute: [],
@@ -6,24 +6,13 @@ const initialState = {
     convertedValute: '',
     mainInputValue: '',
     convertedInputValue: '',
-    time: ''
+    time: '',
+    loading: false
 };
 
 export const reducer = (state = initialState, action) => {
-    console.log(action)
     switch (action.type) {
-        // case REFRESH:
-        //                 let newValute = [];
-        //     for (let prop in action.data.Valute) {
-        //         newValute.push(action.data.Valute[prop])
-        //     };
-        //     return {
-        //         ...state,
-        //         valute: newValute,
-        //         time: time
-        //     };
-
-
+       
         case VALUTES_LOAD:
             let newValute = [];
             let date = new Date(action.data.Date);
@@ -33,18 +22,19 @@ export const reducer = (state = initialState, action) => {
             let hour = date.getHours();
             let minutes = date.getMinutes();
 
-            //форматирование
+            //форматирование даты
             year = year.toString().slice(-2);
             month = month < 10 ? '0' + month : month;
             dayOfMonth = dayOfMonth < 10 ? '0' + dayOfMonth : dayOfMonth;
             hour = hour < 10 ? '0' + hour : hour;
             minutes = minutes < 10 ? '0' + minutes : minutes;
 
-            let time = `${dayOfMonth}.${month}.${year} ${hour}:${minutes}`
+            let time = `${dayOfMonth}.${month}.${year} ${hour}:${minutes}`;
 
             for (let prop in action.data.Valute) {
                 newValute.push(action.data.Valute[prop])
             };
+
             return {
                 ...state,
                 valute: newValute,
@@ -58,12 +48,13 @@ export const reducer = (state = initialState, action) => {
                     ...state,
                     mainValute: mainValute.Value,
                     convertedInputValue: ((mainValute.Value/state.convertedValute) * state.mainInputValue).toFixed(3)
-                }
-            }
+                };
+            };
+
             return {
                 ...state,
                 mainValute: mainValute.Value
-            }
+            };
 
         case SET_CONVERTED_VALUTE:
 
@@ -74,42 +65,54 @@ export const reducer = (state = initialState, action) => {
                     convertedValute: convertedValute.Value,
                     mainInputValue: (state.convertedInputValue / (state.mainValute/convertedValute.Value)).toFixed(3)
                 }
-            }
+            };
 
             return {
                 ...state,
                 convertedValute: convertedValute.Value
-            }
+            };
 
         case MAIN_INPUT:
         
             if (state.convertedValute == '' || state.mainValute == '') {
                 alert("Выберите валюту")
                 return state
-            }
+            };
 
-            const calculatedValue = ((state.mainValute/state.convertedValute) * action.text).toFixed(3)
+            const calculatedValue = ((state.mainValute/state.convertedValute) * action.text).toFixed(3);
             
             return {
                 ...state,
                 mainInputValue: action.text,
                 convertedInputValue: calculatedValue
-            }
+            };
 
         case CONVERTED_INPUT:
         
             if (state.convertedValute == '' || state.mainValute == '') {
                 alert("Выберите валюту")
                 return state
-            }
+            };
 
-            const calculatedReversedValue = (action.text/(state.mainValute/state.convertedValute)).toFixed(3)
+            const calculatedReversedValue = (action.text/(state.mainValute/state.convertedValute)).toFixed(3);
             
             return {
                 ...state,
                 mainInputValue: calculatedReversedValue,
                 convertedInputValue: action.text
-            }
+            };
+
+        case LOADER_OFF:
+            return {
+                ...state,
+                loading: false
+            };
+
+        case LOADER_ON:
+            return {
+                ...state,
+                loading: true
+            };
 
         default:
             return state
