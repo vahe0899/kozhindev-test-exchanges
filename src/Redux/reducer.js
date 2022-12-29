@@ -5,30 +5,51 @@ const initialState = {
     mainValute: '',
     convertedValute: '',
     mainInputValue: '',
-    convertedInputValue: ''
+    convertedInputValue: '',
+    time: ''
 };
 
 export const reducer = (state = initialState, action) => {
     console.log(action)
     switch (action.type) {
-        case REFRESH:
-            // return {
-            //     ...state,
-            //     lists: {
-            //         ...state.lists,
-            //         chest: true,
-            //     }
-            // }
+        // case REFRESH:
+        //                 let newValute = [];
+        //     for (let prop in action.data.Valute) {
+        //         newValute.push(action.data.Valute[prop])
+        //     };
+        //     return {
+        //         ...state,
+        //         valute: newValute,
+        //         time: time
+        //     };
+
 
         case VALUTES_LOAD:
             let newValute = [];
-            for (let prop in action.data) {
-                newValute.push(action.data[prop])
-            }
+            let date = new Date(action.data.Date);
+            let dayOfMonth = date.getDate();
+            let month = date.getMonth() + 1;
+            let year = date.getFullYear();
+            let hour = date.getHours();
+            let minutes = date.getMinutes();
+
+            //форматирование
+            year = year.toString().slice(-2);
+            month = month < 10 ? '0' + month : month;
+            dayOfMonth = dayOfMonth < 10 ? '0' + dayOfMonth : dayOfMonth;
+            hour = hour < 10 ? '0' + hour : hour;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+
+            let time = `${dayOfMonth}.${month}.${year} ${hour}:${minutes}`
+
+            for (let prop in action.data.Valute) {
+                newValute.push(action.data.Valute[prop])
+            };
             return {
                 ...state,
-                valute: newValute
-            }
+                valute: newValute,
+                time: time
+            };
 
         case SET_MAIN_VALUTE:
             const mainValute = state.valute.find(item => item.Name == action.data);

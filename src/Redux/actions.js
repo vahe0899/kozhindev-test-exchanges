@@ -1,11 +1,5 @@
-import { REFRESH, VALUTES_LOAD, SET_MAIN_VALUTE, SET_CONVERTED_VALUTE, CONVERTED_INPUT, MAIN_INPUT } from "./types";
+import { VALUTES_LOAD, SET_MAIN_VALUTE, SET_CONVERTED_VALUTE, CONVERTED_INPUT, MAIN_INPUT } from "./types";
 import axios from 'axios';
-
-export function refresh() {
-    return {
-        type: REFRESH
-    }
-};
 
 export function setMainValute(data) {
     return {
@@ -40,7 +34,7 @@ export function valutesLoad() {
         const jsonData = await axios.get("https://www.cbr-xml-daily.ru/daily_json.js")
         dispatch({
             type: VALUTES_LOAD,
-            data: jsonData.data.Valute
+            data: jsonData.data
         })
     }
 };
