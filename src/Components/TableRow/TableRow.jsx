@@ -5,10 +5,10 @@ function TableRow(props) {
             <td>{props.id}</td>
             <td>{props.data.CharCode}</td>
             <td>{props.data.Name}</td>
-            <td>1</td>
-            <td>70</td>
-            <td>95</td>
-            <td>32</td>
+            <td>{(props.data.Value).toFixed(2)}</td>
+            <td>{(props.data.Value/props.dollar.Value).toFixed(2)}</td>
+            <td>{(props.data.Value/props.euro.Value).toFixed(2)}</td>
+            <td>{(props.data.Value/props.yuan.Value).toFixed(2)}</td>
         </tr>
     )
 }

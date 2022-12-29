@@ -11,6 +11,18 @@ function Exchange() {
         return state.valute
     });
 
+    const euro = useSelector(state => {
+        return state.valute.find(item => item.CharCode == 'EUR')
+    });
+
+    const dollar = useSelector(state => {
+        return state.valute.find(item => item.CharCode == 'USD')
+    });
+
+    const yuan = useSelector(state => {
+        return state.valute.find(item => item.CharCode == 'CNY')
+    });
+
     const refreshHandler = () => {
         dispatch(valutesLoad());
     };  
@@ -45,7 +57,7 @@ function Exchange() {
                     <th>Курс к Евро</th>
                     <th>Курс к Юаню</th>
                 </tr>
-                {valute.map((item) => <TableRow data={item} id={valute.indexOf(item) + 1}/>)}
+                {valute.map((item) => <TableRow data={item} id={valute.indexOf(item) + 1} dollar={dollar} euro={euro} yuan={yuan}/>)}
             </tbody>
         </table>
         <div className="converter">
