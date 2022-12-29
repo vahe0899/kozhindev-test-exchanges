@@ -7,6 +7,12 @@ import SelectItem from '../SelectItem/SelectItem';
 import Spin from '../Spin/Spin';
 
 function Exchange() {
+    function validation(event) {
+        if (/\+|-/.test(event.key)) {
+            event.preventDefault();
+        }
+    }
+
     const dispatch = useDispatch();
 
     const valute = useSelector(state => {
@@ -97,10 +103,10 @@ function Exchange() {
                         <option disabled selected value> -- Выберите валюту -- </option>
                         {valute.map((item) => <SelectItem data={item} id={valute.indexOf(item) + 1} key={valute.indexOf(item)}/>)}
                     </select>   
-                    <input type="number" placeholder='Введите значение...' onChange={mainInputHandler} value={mainInputValue}></input>
+                    <input onKeyPress={validation} type="number" placeholder='Введите значение...' onChange={mainInputHandler} value={mainInputValue}></input>
                 </div>    
                 <div className="dropdown">
-                    <input type="number" placeholder='Введите значение...' onChange={convertedInputHandler} value={convertedInputValue}></input>
+                    <input onKeyPress={validation} type="number" placeholder='Введите значение...' onChange={convertedInputHandler} value={convertedInputValue}></input>
                     <select className="dropbtn" onChange={convertedValuteHandler}>
                         <option disabled selected value> -- Выберите валюту -- </option>
                         {valute.map((item) => <SelectItem data={item} id={valute.indexOf(item) + 1} key={valute.indexOf(item)}/>)}
