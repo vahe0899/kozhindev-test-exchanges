@@ -1,4 +1,4 @@
-import { VALUTES_LOAD, SET_MAIN_VALUTE, SET_CONVERTED_VALUTE, CONVERTED_INPUT, MAIN_INPUT, LOADER_OFF, LOADER_ON } from "./types";
+import {REFRESH, VALUTES_LOAD, SET_MAIN_VALUTE, SET_CONVERTED_VALUTE, CONVERTED_INPUT, MAIN_INPUT, LOADER_OFF, LOADER_ON } from "./types";
 import axios from 'axios';
 
 export function setMainValute(data) {
@@ -54,5 +54,23 @@ export function valutesLoad() {
         })
         dispatch(loaderOff())
         }, 1000);
+    }
+};
+
+export function refresh() {
+    return async dispatch => {
+        dispatch(loaderOn())
+        //обновление данных происходит раз в сутки, поэтому здесь старый запрос
+        const jsonData = await axios.get("https://www.cbr-xml-daily.ru//archive//2022//12//27//daily_json.js")
+
+        //Загрузка происходит слишком быстро. Для наглядности добавил setTimeOut
+        setTimeout(() => {
+            dispatch({
+            type: REFRESH,
+            data: jsonData.data
+        })
+        dispatch(loaderOff())
+        }, 1000);
+      
     }
 };

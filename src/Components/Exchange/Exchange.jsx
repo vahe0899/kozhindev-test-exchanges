@@ -1,6 +1,6 @@
 import '../Exchange/_Exchange.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { valutesLoad, setMainValute, setConvertedValute, convertedInput, mainInput } from '../../Redux/actions';
+import { refresh, valutesLoad, setMainValute, setConvertedValute, convertedInput, mainInput } from '../../Redux/actions';
 import { useEffect } from 'react';
 import TableRow from '../TableRow/TableRow';
 import SelectItem from '../SelectItem/SelectItem';
@@ -38,7 +38,7 @@ function Exchange() {
     });
 
     const refreshHandler = () => {
-        dispatch(valutesLoad());
+        dispatch(refresh());
     };  
 
     const mainValuteHandler = (event) => {

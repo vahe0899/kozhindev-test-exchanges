@@ -5,3 +5,4 @@ export const SET_MAIN_VALUTE = 'SET_MAIN_VALUTE';
 export const SET_CONVERTED_VALUTE = 'SET_CONVERTED_VALUTE';
 export const MAIN_INPUT = 'MAIN_INPUT';
 export const CONVERTED_INPUT = 'CONVERTED_INPUT';
+export const REFRESH = 'REFRESH';
