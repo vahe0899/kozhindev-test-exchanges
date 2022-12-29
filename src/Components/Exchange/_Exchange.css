@@ -39,25 +39,14 @@ th {
 }
 
 .converter {
-    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
-}
-
-.inputs {
-    display: flex;
-    flex-direction: column;
-}
-
-.dropdowns {
-    display: flex;
-    flex-direction: column;
+    padding: 4em;
 }
 
 input {
-    margin: 5px;
-    border-radius: 4px;
+    margin: 5px 0px;
     border: solid #CFCFCF 1px;
     box-shadow: 0px 0px 1px 2px #00000040 inset;
     padding: 6px 12px;
@@ -67,4 +56,28 @@ input {
 
 input:focus {
     border: solid #04AA6D 1px;
+}
+
+.dropdown {
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+}
+
+.dropbtn {
+    position: relative;
+    color: white;
+    background-color: #04AA6D;
+    margin: 5px 0px;
+    border: solid #CFCFCF 1px;
+    box-shadow: 0px 0px 1px 2px #00000040 inset;
+    padding: 6px 12px;
+    outline: none;
+    width: -webkit-fill-available;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.dropbtn:hover {
+    background-color: #04915e;
 }
