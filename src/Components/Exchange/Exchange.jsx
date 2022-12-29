@@ -1,6 +1,6 @@
 import '../Exchange/_Exchange.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { refresh, valutesLoad, setMainValute, setConvertedValute, convertedInput, mainInput } from '../../Redux/actions';
+import { valutesLoad, setMainValute, setConvertedValute, convertedInput, mainInput } from '../../Redux/actions';
 import { useEffect } from 'react';
 import TableRow from '../TableRow/TableRow';
 import SelectItem from '../SelectItem/SelectItem';
@@ -12,6 +12,10 @@ function Exchange() {
         return state.valute
     });
 
+    const time = useSelector(state => {
+        return state.time
+    });
+
     const mainInputValue = useSelector(state => {
         return state.mainInputValue
     });
@@ -19,10 +23,6 @@ function Exchange() {
     const convertedInputValue = useSelector(state => {
         return state.convertedInputValue
     });
-
-    // const mainValute = useSelector(state => {
-    //     return state.convertedValute
-    // });
 
     const euro = useSelector(state => {
         return state.valute.find(item => item.CharCode == 'EUR')
@@ -36,9 +36,9 @@ function Exchange() {
         return state.valute.find(item => item.CharCode == 'CNY')
     });
 
-    // const refreshHandler = () => {
-    //     dispatch(valutesLoad());
-    // };  
+    const refreshHandler = () => {
+        dispatch(valutesLoad());
+    };  
 
     const mainValuteHandler = (event) => {
         dispatch(setMainValute(event.target.value));
@@ -68,9 +68,9 @@ function Exchange() {
             </h2>
             <div className="valute-refresh">
                 <div className="time">
-                    Обновлено в последний раз: СЕЙЧАС
+                    Последнее обновление базы данных: {time}
                 </div>
-                <button className="refresh">
+                <button className="refresh" onClick={refreshHandler}>
                     Обновить
                 </button>
             </div>
